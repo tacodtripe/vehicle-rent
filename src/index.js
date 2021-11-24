@@ -1,6 +1,12 @@
+/* eslint-disable no-unused-vars */
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+
+function importAll(r) {
+  return r.keys().map(r);
+}
+const images = importAll(require.context('./assets/images', false, /\.(png|jpe?g|svg)$/));
 
 const itemsContainer = document.querySelector('#itemsContainer');
 
