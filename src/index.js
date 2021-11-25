@@ -2,7 +2,9 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+import Api from './app/api';
 
+const api = new Api();
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -10,7 +12,7 @@ const images = importAll(require.context('./assets/images', false, /\.(png|jpe?g
 
 const itemsContainer = document.querySelector('#itemsContainer');
 
-const addItem = () => {
+const addItem = (carName) => {
   const itemContainer = document.createElement('div');
   itemContainer.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'row', 'justify-content-center');
   itemsContainer.appendChild(itemContainer);
@@ -30,7 +32,7 @@ const addItem = () => {
   itemInfo.appendChild(itemInfoFr);
   const itemName = document.createElement('p');
   itemName.classList.add('col-10');
-  itemName.innerText = 'Demo name';
+  itemName.innerText = carName;
   itemInfoFr.appendChild(itemName);
   const likeButton = document.createElement('i');
   likeButton.classList.add('bi', 'bi-heart', 'col-2');
@@ -55,8 +57,10 @@ const addItem = () => {
   itemContainer.appendChild(reservationsButton);
 };
 
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
+api.getData()
+  .then((response) => response)
+  .then((data) => {
+    data.Results.forEach((e) => {
+      addItem(e.Model_Name);
+    });
+  });
