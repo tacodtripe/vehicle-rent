@@ -18,8 +18,9 @@ const addItem = (carName) => {
   itemsContainer.appendChild(itemContainer);
 
   const itemImg = document.createElement('img');
-  itemImg.setAttribute('src', 'assets/images/tesla-model-x.jpg');
+  itemImg.setAttribute('src', `assets/images/${carName}.jpg`);
   itemImg.setAttribute('width', '100');
+  itemImg.setAttribute('height', '200');
   itemImg.classList.add('row');
   itemContainer.appendChild(itemImg);
 
