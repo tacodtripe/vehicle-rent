@@ -1,10 +1,16 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, no-restricted-globals */
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+
+import { clippingParents } from '@popperjs/core';
 import Api from './app/api';
 
+import Likes from './app/likes';
+
 const api = new Api();
+const likes = new Likes();
+
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -37,14 +43,20 @@ const addItem = (carName) => {
   itemInfoFr.appendChild(itemName);
   const likeButton = document.createElement('i');
   likeButton.classList.add('bi', 'bi-heart', 'col-2');
+  likeButton.id = carName;
   itemInfoFr.appendChild(likeButton);
+
+  likeButton.addEventListener('click', () => {
+    likes.likeItem(likeButton.id);
+    setTimeout(() => { location.reload(); }, 500);
+  });
 
   const itemInfoSr = document.createElement('div');
   itemInfoSr.classList.add('row', 'justify-content-end');
   itemInfo.appendChild(itemInfoSr);
   const likeCounter = document.createElement('span');
-  likeCounter.classList.add('col-3');
-  likeCounter.textContent = '10 likes';
+  likeCounter.classList.add('col-3', 'likeCounter');
+  likeCounter.id = `${carName}likes`;
   itemInfoSr.appendChild(likeCounter);
 
   const commentsButton = document.createElement('span');
@@ -64,4 +76,13 @@ api.getData()
     data.Results.forEach((e) => {
       addItem(e.Model_Name);
     });
+    likes.getLikes()
+      .then((response) => {
+        response.forEach((l) => {
+          const updateLikes = document.getElementById(`${l.item_id}likes`);
+          if (updateLikes) {
+            updateLikes.innerText = `${l.likes} likes`;
+          }
+        });
+      });
   });
