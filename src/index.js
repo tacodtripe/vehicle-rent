@@ -2,20 +2,15 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-
-import { clippingParents } from '@popperjs/core';
 import Api from './app/api';
-
 import Likes from './app/likes';
 
 const api = new Api();
 const likes = new Likes();
-
 function importAll(r) {
   return r.keys().map(r);
 }
 const images = importAll(require.context('./assets/images', false, /\.(png|jpe?g|svg)$/));
-
 const itemsContainer = document.querySelector('#itemsContainer');
 
 const addItem = (carName) => {
@@ -69,6 +64,8 @@ const addItem = (carName) => {
   reservationsButton.textContent = 'Reservations';
   itemContainer.appendChild(reservationsButton);
 };
+
+const countCars = () => itemsContainer.childElementCount;
 
 api.getData()
   .then((response) => response)
