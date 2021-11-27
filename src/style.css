@@ -34,6 +34,10 @@ img {
     padding: 1rem;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .modal h2 {
     font-size: 2.5rem;
     margin: 0.5rem;
@@ -41,6 +45,10 @@ img {
 
 .headingclass {
     flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
 }
 
 #comments {

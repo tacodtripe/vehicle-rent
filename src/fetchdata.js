@@ -25,6 +25,21 @@ const popupmodal = async (id) => {
                         <p> <span class="description-header">Model Name:</span>${element.Model_Name} </p>
                     </div>
                 </div>
+                <div class="comments-container">
+                    <div class="all-comments text-center">
+                        <h3>Comments <span id="comments-count">0</span></h3>
+                        <ul id="comments-ul" class="d-flex justify-center flex-col">
+                        </ul>
+                    </div>
+                    <div class="add-comments text-center d-flex justify-center">
+                        <form action="POST">
+                            <input name= "name" type="text" id="input-name" placeholder="Your name" required>
+                            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
+                            <span id = "alert" class="text-start"> </span>
+                            <button id="submit-comment" class="submit-comment" data="${element.Model_ID}"> Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 			`;
             const exit = document.querySelector('.fa-times');
