@@ -2,6 +2,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+import pop from './fetchdata.js';
 import Api from './app/api';
 import Likes from './app/likes';
 
@@ -13,13 +14,13 @@ function importAll(r) {
 const images = importAll(require.context('./assets/images', false, /\.(png|jpe?g|svg)$/));
 const itemsContainer = document.querySelector('#itemsContainer');
 const carNumber = document.querySelector('#carNumber');
-const addItem = (carName) => {
+const addItem = (carName, carID) => {
   const itemContainer = document.createElement('div');
   itemContainer.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'row', 'justify-content-center');
   itemsContainer.appendChild(itemContainer);
 
   const itemImg = document.createElement('img');
-  itemImg.setAttribute('src', `assets/images/${carName}.jpg`);
+  itemImg.setAttribute('src', `assets/images/${carID}.jpg`);
   itemImg.setAttribute('width', '100');
   itemImg.setAttribute('height', '200');
   itemImg.classList.add('row');
@@ -55,7 +56,8 @@ const addItem = (carName) => {
   itemInfoSr.appendChild(likeCounter);
 
   const commentsButton = document.createElement('span');
-  commentsButton.classList.add('row', 'justify-content-center', 'border-black', 'black-shadow', 'w-50', 'mb-1');
+  commentsButton.classList.add('row', 'comments', 'justify-content-center', 'border-black', 'black-shadow', 'w-50', 'mb-1');
+  commentsButton.id=carID;
   commentsButton.textContent = 'Comments';
   itemContainer.appendChild(commentsButton);
 
@@ -68,12 +70,13 @@ const addItem = (carName) => {
 const countCars = () => itemsContainer.childElementCount;
 
 api.getData()
-  // .then((response) => response)
   .then((data) => {
     data.Results.forEach((e) => {
-      addItem(e.Model_Name);
+      addItem(e.Model_Name, e.Model_ID);
     });
+    pop(data.Results)
     carNumber.innerText = `Cars(${countCars()})`;
+    
     likes.getLikes()
       .then((response) => {
         response.forEach((l) => {
