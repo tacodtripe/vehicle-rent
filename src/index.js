@@ -5,14 +5,17 @@ import './style.css';
 import pop from './fetchdata.js';
 import Api from './app/api';
 import Likes from './app/likes';
+import Comments from './app/comments';
 
 const api = new Api();
 const likes = new Likes();
+const comments = new Comments();
 function importAll(r) {
   return r.keys().map(r);
 }
 const images = importAll(require.context('./assets/images', false, /\.(png|jpe?g|svg)$/));
 const itemsContainer = document.querySelector('#itemsContainer');
+const commentContainer = document.querySelector('#commentContainer');
 const carNumber = document.querySelector('#carNumber');
 const addItem = (carName, carID) => {
   const itemContainer = document.createElement('div');
@@ -54,6 +57,11 @@ const addItem = (carName, carID) => {
   likeCounter.classList.add('col-3', 'likeCounter');
   likeCounter.id = `${carName}likes`;
   itemInfoSr.appendChild(likeCounter);
+
+/*   const commCounter = document.createElement('span');
+  commCounter.classList.add('col-3', 'commentCounter');
+  commCounter.id = `${carName}comments`;
+  commentContainer.appendChild(commCounter); */
 
   const commentsButton = document.createElement('span');
   commentsButton.classList.add('row', 'comments', 'justify-content-center', 'border-black', 'black-shadow', 'w-50', 'mb-1');

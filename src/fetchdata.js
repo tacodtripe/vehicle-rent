@@ -1,4 +1,6 @@
 //for comments popout function
+import Comments from './app/comments';
+const comments = new Comments();
 const pop = (cars) => {
     const modal = document.querySelector('#modalContainer');
     const btn = document.querySelectorAll('.comments');
@@ -9,9 +11,7 @@ const pop = (cars) => {
         //const carapiurl = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/tesla?format=json`;
         //const cars = await fetch(carapiurl).then((response) => response.json()).then((data) => data.Results);
         cars.forEach((element) => {
-            console.log(element)
             if (element.Model_ID == id) {
-                console.log('just before modal.innerHTML')
                 modal.innerHTML = `
                 <div class="modal container">
                     <div class="car-header justify-end d-flex">
@@ -33,11 +33,12 @@ const pop = (cars) => {
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-12 row text-center">
-                            <h3>Comments <span id="comments-count">0</span></h3>
+                            <h3>Comments <span id="comments-count"></span></h3>
                             <ul id="comments-ul" class="d-flex justify-center flex-col">
                             </ul>
                         </div>
-                        <form class="col-12 row w-50" action="POST">
+                        <div class="text-center col-12 commentCounter row" id="${element.Model_Name}comments"></div>
+                        <form class="col-12 row w-50">
                             <input name= "name" type="text" id="input-name" placeholder="Your name" required>
                             <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
                             <span id = "alert" class="text-start"> </span>
@@ -53,20 +54,51 @@ const pop = (cars) => {
                     footer.classList.remove('hidden');
                     bodysection.classList.remove('hidden');
                 });
+
+                const submit = document.querySelector('.submit-comment');
+                submit.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const getName = document.querySelector('#input-name');
+                    const getComment = document.querySelector('#comment');
+                    comments.commentItem(element.Model_Name, getName.value, getComment.value);
+                })
+
+                const commentcontainer = document.getElementById(`${element.Model_Name}comments`);
+                comments.getComments(element.Model_Name)
+                .then((respo) => {
+                    var cntcomments = 0;
+                        respo.forEach((comm) => {
+                            console.log(typeof comm.username)
+                            if (typeof comm.username == 'string') {
+                                const storecomment = document.createElement('div');
+                                cntcomments += 1;
+                                storecomment.classList.add('col-12');
+                                storecomment.innerHTML = `
+                                    <div>
+                                        userName: ${comm.username}
+                                    </div>
+                                    <div>
+                                        userComment: ${comm.comment}
+                                    </div>
+                                `;
+                                commentcontainer.appendChild(storecomment);
+                            }
+                        });
+                        const commcount = document.getElementById('comments-count');
+                        commcount.innerText = cntcomments;
+                }); 
             }
         });
     };
     for (let i=0; i<btn.length; i+=1) {
         btn[i].addEventListener('click', () => {
             const id = btn[i].getAttribute('id')
-            console.log('before popupmodal call')
             popupmodal(id)
-            console.log('after popupmodal call')
             modal.classList.remove('hidden');
             footer.classList.add('hidden');
             bodysection.classList.add('hidden');
-            header.classList.add('hidden');
-        })
+            header.classList.add('hidden');     
+        })  
     }
 }
 
