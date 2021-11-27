@@ -1,3 +1,4 @@
+//for comments popout function
 const modal = document.querySelector('#modal');
 const btn = document.querySelectorAll('#comments');
 const header = document.querySelector('#headclass');
