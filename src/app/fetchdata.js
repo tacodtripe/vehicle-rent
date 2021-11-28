@@ -1,5 +1,5 @@
 // for comments popout function
-import Comments from './app/comments';
+import Comments from './comments';
 
 const comments = new Comments();
 const pop = (cars) => {
