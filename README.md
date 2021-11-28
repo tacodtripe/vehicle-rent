@@ -8,16 +8,25 @@ This is a template to be the start point for future projects where webpack is in
 - HTML
 - CSS
 
-## Getting Started - How to deploy on your machine
+## Live version
 
-- Clone the project
-- run `npm install` at your command line
-- run `npm start`
+[click here](https://tacodtripe.github.io/vehicle-rent)
 
 ### Prerequisites
 
 - Text Editor (VSCode for example)
+- Node and npm instaled
 - Browser
+
+## Getting Started - How to deploy on your machine
+
+- Clone the project
+- run `npm install` at your command line to install al dependencies
+- run `npm start`
+
+### Testing
+
+- run `npm test` and your terminal
 
 ## Author
 

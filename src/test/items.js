@@ -1,29 +1,13 @@
-/* eslint-disable no-unused-vars, no-restricted-globals */
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css';
-import pop from './app/fetchdata';
-import Api from './app/api';
-import Likes from './app/likes';
-import Comments from './app/comments';
+/* eslint-disable no-undef, no-restricted-globals */
+const countCars = () => itemsContainer.childElementCount;
 
-const api = new Api();
-const likes = new Likes();
-const comments = new Comments();
-function importAll(r) {
-  return r.keys().map(r);
-}
-const images = importAll(require.context('./assets/images', false, /\.(png|jpe?g|svg)$/));
-const itemsContainer = document.querySelector('#itemsContainer');
-const commentContainer = document.querySelector('#commentContainer');
-const carNumber = document.querySelector('#carNumber');
-const addItem = (carName, carID) => {
+const addItem = (carName) => {
   const itemContainer = document.createElement('div');
   itemContainer.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'row', 'justify-content-center');
   itemsContainer.appendChild(itemContainer);
 
   const itemImg = document.createElement('img');
-  itemImg.setAttribute('src', `assets/images/${carID}.jpg`);
+  itemImg.setAttribute('src', `assets/images/${carName}.jpg`);
   itemImg.setAttribute('width', '100');
   itemImg.setAttribute('height', '200');
   itemImg.classList.add('row');
@@ -59,8 +43,7 @@ const addItem = (carName, carID) => {
   itemInfoSr.appendChild(likeCounter);
 
   const commentsButton = document.createElement('span');
-  commentsButton.classList.add('row', 'comments', 'justify-content-center', 'border-black', 'black-shadow', 'w-50', 'mb-1');
-  commentsButton.id = carID;
+  commentsButton.classList.add('row', 'justify-content-center', 'border-black', 'black-shadow', 'w-50', 'mb-1');
   commentsButton.textContent = 'Comments';
   itemContainer.appendChild(commentsButton);
 
@@ -70,23 +53,4 @@ const addItem = (carName, carID) => {
   itemContainer.appendChild(reservationsButton);
 };
 
-const countCars = () => itemsContainer.childElementCount;
-
-api.getData()
-  .then((data) => {
-    data.Results.forEach((e) => {
-      addItem(e.Model_Name, e.Model_ID);
-    });
-    pop(data.Results);
-    carNumber.innerText = `Cars(${countCars()})`;
-
-    likes.getLikes()
-      .then((response) => {
-        response.forEach((l) => {
-          const updateLikes = document.getElementById(`${l.item_id}likes`);
-          if (updateLikes) {
-            updateLikes.innerText = `${l.likes} likes`;
-          }
-        });
-      });
-  });
+export { countCars, addItem };
