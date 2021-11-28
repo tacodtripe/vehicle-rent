@@ -8,6 +8,10 @@ This is a template to be the start point for future projects where webpack is in
 - HTML
 - CSS
 
+## Live version
+
+[click here](https://tacodtripe.github.io/vehicle-rent)
+
 ### Prerequisites
 
 - Text Editor (VSCode for example)
