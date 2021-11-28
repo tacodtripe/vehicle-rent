@@ -90,7 +90,7 @@ const pop = (cars) => {
   };
   for (let i = 0; i < btn.length; i += 1) {
     btn[i].addEventListener('click', () => {
-      const id = btn[i].getAttribute('id');
+      const id = parseInt(btn[i].getAttribute('id'), 10);
       popupmodal(id);
       modal.classList.remove('hidden');
       footer.classList.add('hidden');
