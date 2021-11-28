@@ -2,7 +2,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import pop from './fetchdata.js';
+import pop from './fetchdata';
 import Api from './app/api';
 import Likes from './app/likes';
 import Comments from './app/comments';
@@ -58,14 +58,9 @@ const addItem = (carName, carID) => {
   likeCounter.id = `${carName}likes`;
   itemInfoSr.appendChild(likeCounter);
 
-/*   const commCounter = document.createElement('span');
-  commCounter.classList.add('col-3', 'commentCounter');
-  commCounter.id = `${carName}comments`;
-  commentContainer.appendChild(commCounter); */
-
   const commentsButton = document.createElement('span');
   commentsButton.classList.add('row', 'comments', 'justify-content-center', 'border-black', 'black-shadow', 'w-50', 'mb-1');
-  commentsButton.id=carID;
+  commentsButton.id = carID;
   commentsButton.textContent = 'Comments';
   itemContainer.appendChild(commentsButton);
 
@@ -82,9 +77,9 @@ api.getData()
     data.Results.forEach((e) => {
       addItem(e.Model_Name, e.Model_ID);
     });
-    pop(data.Results)
+    pop(data.Results);
     carNumber.innerText = `Cars(${countCars()})`;
-    
+
     likes.getLikes()
       .then((response) => {
         response.forEach((l) => {

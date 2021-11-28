@@ -28,12 +28,12 @@ body {
 }
 
 .modal {
-    display: block;
-    width: 85vw;
-    min-height: 100vh;
-    border: #6d8347 2px solid;
-    padding: 1rem;
-    position: unset;
+  display: block;
+  width: 85vw;
+  min-height: 100vh;
+  border: #6d8347 2px solid;
+  padding: 1rem;
+  position: unset;
 }
 
 .flex-col {
@@ -41,12 +41,12 @@ body {
 }
 
 .modal h2 {
-    font-size: 2.5rem;
-    margin: 0.5rem;
+  font-size: 2.5rem;
+  margin: 0.5rem;
 }
 
 .headingclass {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .text-center {
@@ -54,43 +54,43 @@ body {
 }
 
 #comments {
-    width: 10%;
+  width: 10%;
 }
 
 .modal-header-img {
-    align-items: center;
-    flex-direction: column;
+  align-items: center;
+  flex-direction: column;
 }
 
 .modal-header-img img {
-    width: 500px;
-    height: 300px;
+  width: 500px;
+  height: 300px;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .description-header {
-    font-weight: bolder;
-    text-transform: uppercase;
+  font-weight: bolder;
+  text-transform: uppercase;
 }
 
 .d-flex {
-    display: flex;
+  display: flex;
 }
 
 .justify-end {
-    justify-content: end;
+  justify-content: end;
 }
 
 .justify-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .left,
 .right {
-    width: 50%;
+  width: 50%;
 }
 
 .close {
@@ -98,4 +98,3 @@ body {
   font-size: 2rem;
   background: transparent;
 }
-

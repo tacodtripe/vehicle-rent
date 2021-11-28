@@ -1,5 +1,5 @@
 /* eslint-disable no-undef, no-restricted-globals */
-const countCars = () => 5;
+const countCars = () => itemsContainer.childElementCount;
 
 const addItem = (carName) => {
   const itemContainer = document.createElement('div');

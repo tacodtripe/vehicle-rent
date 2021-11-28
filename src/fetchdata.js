@@ -1,18 +1,17 @@
-//for comments popout function
+// for comments popout function
 import Comments from './app/comments';
+
 const comments = new Comments();
 const pop = (cars) => {
-    const modal = document.querySelector('#modalContainer');
-    const btn = document.querySelectorAll('.comments');
-    const header = document.querySelector('.navbar');
-    const footer = document.querySelector('#footerid');
-    const bodysection = document.querySelector('#itemsContainer')
-    const popupmodal = (id) => {
-        //const carapiurl = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/tesla?format=json`;
-        //const cars = await fetch(carapiurl).then((response) => response.json()).then((data) => data.Results);
-        cars.forEach((element) => {
-            if (element.Model_ID == id) {
-                modal.innerHTML = `
+  const modal = document.querySelector('#modalContainer');
+  const btn = document.querySelectorAll('.comments');
+  const header = document.querySelector('.navbar');
+  const footer = document.querySelector('#footerid');
+  const bodysection = document.querySelector('#itemsContainer');
+  const popupmodal = (id) => {
+    cars.forEach((element) => {
+      if (element.Model_ID === id) {
+        modal.innerHTML = `
                 <div class="modal container">
                     <div class="car-header justify-end d-flex">
                         <button class="close"><i class="fas fa-times"></i></button>
@@ -47,33 +46,32 @@ const pop = (cars) => {
                     </div>
                 </div>
                 `;
-                const exit = document.querySelector('.fa-times');
-                exit.addEventListener('click', () => {
-                    modal.classList.add('hidden');
-                    header.classList.remove('hidden');
-                    footer.classList.remove('hidden');
-                    bodysection.classList.remove('hidden');
-                });
+        const exit = document.querySelector('.fa-times');
+        exit.addEventListener('click', () => {
+          modal.classList.add('hidden');
+          header.classList.remove('hidden');
+          footer.classList.remove('hidden');
+          bodysection.classList.remove('hidden');
+        });
 
-                const submit = document.querySelector('.submit-comment');
-                submit.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const getName = document.querySelector('#input-name');
-                    const getComment = document.querySelector('#comment');
-                    comments.commentItem(element.Model_Name, getName.value, getComment.value);
-                })
+        const submit = document.querySelector('.submit-comment');
+        submit.addEventListener('click', (e) => {
+          e.preventDefault();
+          const getName = document.querySelector('#input-name');
+          const getComment = document.querySelector('#comment');
+          comments.commentItem(element.Model_Name, getName.value, getComment.value);
+        });
 
-                const commentcontainer = document.getElementById(`${element.Model_Name}comments`);
-                comments.getComments(element.Model_Name)
-                .then((respo) => {
-                    var cntcomments = 0;
-                        respo.forEach((comm) => {
-                            console.log(typeof comm.username)
-                            if (typeof comm.username == 'string') {
-                                const storecomment = document.createElement('div');
-                                cntcomments += 1;
-                                storecomment.classList.add('col-12');
-                                storecomment.innerHTML = `
+        const commentcontainer = document.getElementById(`${element.Model_Name}comments`);
+        comments.getComments(element.Model_Name)
+          .then((respo) => {
+            let cntcomments = 0;
+            respo.forEach((comm) => {
+              if (typeof comm.username === 'string') {
+                const storecomment = document.createElement('div');
+                cntcomments += 1;
+                storecomment.classList.add('col-12');
+                storecomment.innerHTML = `
                                     <div>
                                         userName: ${comm.username}
                                     </div>
@@ -81,27 +79,25 @@ const pop = (cars) => {
                                         userComment: ${comm.comment}
                                     </div>
                                 `;
-                                commentcontainer.appendChild(storecomment);
-                            }
-                        });
-                        const commcount = document.getElementById('comments-count');
-                        commcount.innerText = cntcomments;
-                }); 
-            }
-        });
-    };
-    for (let i=0; i<btn.length; i+=1) {
-        btn[i].addEventListener('click', () => {
-            const id = btn[i].getAttribute('id')
-            popupmodal(id)
-            modal.classList.remove('hidden');
-            footer.classList.add('hidden');
-            bodysection.classList.add('hidden');
-            header.classList.add('hidden');     
-        })  
-    }
-}
-
-
+                commentcontainer.appendChild(storecomment);
+              }
+            });
+            const commcount = document.getElementById('comments-count');
+            commcount.innerText = cntcomments;
+          });
+      }
+    });
+  };
+  for (let i = 0; i < btn.length; i += 1) {
+    btn[i].addEventListener('click', () => {
+      const id = btn[i].getAttribute('id');
+      popupmodal(id);
+      modal.classList.remove('hidden');
+      footer.classList.add('hidden');
+      bodysection.classList.add('hidden');
+      header.classList.add('hidden');
+    });
+  }
+};
 
 export default pop;

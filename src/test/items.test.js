@@ -31,8 +31,6 @@ test('the number of cars should be equal to the number of items provided by the 
   document.body.innerHTML = '<div id=\'itemsContainer\'>'
   + '</div>';
 
-  // const itemsContainer = document.querySelector('#itemsContainer')
-
   data.forEach((e) => {
     addItem(e.Model_Name);
   });

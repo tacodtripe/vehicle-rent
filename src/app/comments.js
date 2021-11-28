@@ -1,9 +1,9 @@
 export default class Comments {
-    constructor() {
-      this.baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/LlpQhOb6BeSeG1QA0yT5/comments';
-      this.itemURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/LlpQhOb6BeSeG1QA0yT5/comments?item_id=';
-    }
-  
+  constructor() {
+    this.baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/LlpQhOb6BeSeG1QA0yT5/comments';
+    this.itemURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/LlpQhOb6BeSeG1QA0yT5/comments?item_id=';
+  }
+
     commentItem = async (carName, userName, userComment) => {
       const resp = await fetch(this.baseUrl, {
         method: 'POST',
@@ -18,9 +18,9 @@ export default class Comments {
       });
       return resp.text();
     }
-  
-    getComments = async (item_id) => {
-      const resp = await fetch(`${this.itemURL}${item_id}`);
+
+    getComments = async (itemId) => {
+      const resp = await fetch(`${this.itemURL}${itemId}`);
       return resp.json();
     }
-  }
+}
