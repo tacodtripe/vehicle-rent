@@ -37,7 +37,7 @@ const pop = (cars) => {
                             </ul>
                         </div>
                         <div class="text-center col-12 commentCounter row" id="${element.Model_Name}comments"></div>
-                        <form class="col-12 row w-50">
+                        <form class="col-12 row w-50" action="POST">
                             <input name= "name" type="text" id="input-name" placeholder="Your name" required>
                             <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
                             <span id = "alert" class="text-start"> </span>
@@ -60,6 +60,7 @@ const pop = (cars) => {
           const getName = document.querySelector('#input-name');
           const getComment = document.querySelector('#comment');
           comments.commentItem(element.Model_Name, getName.value, getComment.value);
+          setTimeout(() => { popupmodal(id).reload(); }, 500);
         });
 
         const commentcontainer = document.getElementById(`${element.Model_Name}comments`);
