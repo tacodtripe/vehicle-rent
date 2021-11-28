@@ -2,7 +2,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import pop from './fetchdata';
+import pop from './app/fetchdata';
 import Api from './app/api';
 import Likes from './app/likes';
 import Comments from './app/comments';
