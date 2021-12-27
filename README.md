@@ -1,6 +1,6 @@
-# Webpack Boilerplate
+# Vehicle Rent
 
-This is a template to be the start point for future projects where webpack is involved.
+An application that consumes a third-party API simulating a real vehicle rent page where you can like and comment on the models provided, built with JavaScript.
 
 ## Built With
 
